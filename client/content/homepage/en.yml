@@ -1,0 +1,10 @@
+hero:
+  beforeName: "Hi, I'm "
+  name: "Léo"
+  afterName: ","
+  beforeAdj: "a"
+  vowelPrefix: "n"
+  afterAdj: "developer"
+intro: |
+  I like to try all sorts of things with code and tech, with a strong focus on crafting user-centric realtime experiences.
+  Currently working at [Cixi](https://www.cixi.life/).

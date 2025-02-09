@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { devtoolsOutline, devtoolsColumns } from 'vite-plugin-dev-guides'
 
 export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
@@ -9,12 +8,14 @@ export default defineNuxtConfig({
         '@unocss/nuxt',
         '@vueuse/nuxt',
         '@nuxtjs/i18n',
+        '@nuxt/content',
         '@pinia/nuxt',
         '@nuxt/image',
         '@nuxtjs/strapi',
         '@nuxtjs/seo',
         '@nuxthub/core',
         '@nuxtjs/plausible',
+        '@layoutaid/nuxt'
     ],
     css: ['@unocss/reset/tailwind.css', 'assets/global.scss'],
     plausible: {
@@ -22,8 +23,7 @@ export default defineNuxtConfig({
         apiHost: 'https://stats.pnk.studio',
         proxy: true,
     },
-    vite: {
-        plugins: [devtoolsOutline(), devtoolsColumns()],
+    content: {
     },
     components: [
         {

@@ -12,5 +12,8 @@
   "author": "leoboyerbx",
   "license": "ISC",
   "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {},
+  "pnpm": {
+    "neverBuiltDependencies": []
+  }
 }
