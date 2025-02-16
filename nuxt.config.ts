@@ -5,14 +5,14 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     ssr: true,
     modules: [
+        '@nuxtjs/seo',
+        '@nuxt/content',
         '@unocss/nuxt',
         '@vueuse/nuxt',
         '@nuxtjs/i18n',
-        '@nuxt/content',
         '@pinia/nuxt',
         '@nuxt/image',
         '@nuxtjs/strapi',
-        '@nuxtjs/seo',
         '@nuxthub/core',
         '@nuxtjs/plausible',
         '@layoutaid/nuxt'
