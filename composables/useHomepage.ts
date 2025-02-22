@@ -1,9 +1,9 @@
-export async function useHomepage() {
+export async function useStrapiHomepage() {
   const { locale } = useI18n()
   const { findOne } = useStrapi()
 
   const { data } = await useGlobalRefreshAsyncData(
-    'homepage-' + locale.value,
+    'homepage-strapi-' + locale.value,
     async () => {
       const result = await findOne<Homepage>('homepage', undefined, {
         populate:
@@ -18,4 +18,17 @@ export async function useHomepage() {
   )
 
   return { data }
+}
+
+export async function useContentHomepage() {
+  const { locale } = useI18n()
+  const {data} = useAsyncData(
+    'homepage-' + locale.value,
+    () => queryCollection('homepage').where('locale', '=', locale.value).first()
+  )
+  return data
+}
+
+export async function useHomepage() {
+  return useStrapiHomepage()
 }

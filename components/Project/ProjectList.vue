@@ -5,7 +5,7 @@ const projects = computed(() => homepage.value?.projects)
 <template>
   <section v-if="projects" class="pnk-grid w-full">
     <ScrollReveal class="grid-centered-8 mb-1.5c">
-      <h2
+      <h2   
         class="section-title leaving-item text-center"
         v-html="projects.title"
       ></h2>

@@ -8,7 +8,7 @@ useHead({
   titleTemplate: '%siteName',
 })
 
-const heroEl = ref()
+const wrapperEl = ref()
 const projectsEl = ref()
 const openSourceEl = ref()
 const contactEl = ref()
@@ -16,7 +16,7 @@ const mainNav = useMainNavStore()
 onMounted(async () => {
   await nextTick()
   mainNav.setTargets(
-    heroEl.value.$el,
+    wrapperEl.value.querySelector('#hero'),
     projectsEl.value.$el,
     openSourceEl.value.$el,
     contactEl.value.$el
@@ -41,10 +41,14 @@ onMounted(async () => {
     }
   }
 })
+
+const content = await useContentHomepage()
+console.log(content.value)
 </script>
 <template>
-  <div class="flex flex-col">
-    <Hero id="hero" ref="heroEl" class="leaving-item" />
+  <div class="flex flex-col" ref="wrapperEl">
+    <ContentRenderer :value="content" />
+    <!-- <Hero id="hero" ref="heroEl" class="leaving-item" /> -->
     <ProjectList id="projects" ref="projectsEl" class="mb-24 md:mb-2c" />
     <OpenSourceList
       id="openSource"
