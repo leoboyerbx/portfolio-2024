@@ -23,6 +23,7 @@ export default defineNuxtConfig({
         apiHost: 'https://stats.pnk.studio',
         proxy: true,
     },
+    hub: {},
     content: {
     },
     components: [
