@@ -22,9 +22,16 @@ export async function useStrapiHomepage() {
 
 export async function useContentHomepage() {
   const { locale } = useI18n()
+  console.log(locale.value)
   const {data} = useAsyncData(
     'homepage-' + locale.value,
-    () => queryCollection('homepage').where('locale', '=', locale.value).first()
+    async () => {
+      const result = await queryCollection('homepage').where('locale', '=', locale.value).first()
+      return result
+    },
+    {
+      dedupe: 'defer',
+    }
   )
   return data
 }

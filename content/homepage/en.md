@@ -35,5 +35,5 @@ adjectives:
 ---
 I like to try all sorts of things with code and tech, with a strong focus on crafting user-centric realtime experiences.
 
-Currently working at [Cixi](https://www.cixi.life/).
+Currently working at [Cixi](https://www.cixi.life/){:target="_blank"}, Annecy, FR.
 ::

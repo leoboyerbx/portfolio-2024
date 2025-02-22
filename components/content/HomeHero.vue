@@ -4,7 +4,7 @@ export interface HomeHeroProps {
   name: string
   afterName: string
   beforeAdj: string
-  vowelPrefix: string
+  vowelPrefix?: string
   afterAdj: string
   adjectives: {
     text: string

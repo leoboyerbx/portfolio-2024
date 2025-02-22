@@ -42,12 +42,23 @@ onMounted(async () => {
   }
 })
 
-const content = await useContentHomepage()
-console.log(content.value)
+const { locale } = useI18n()
+const { data } = await useAsyncData(
+  'homepage-' + locale.value,
+  async () => {
+    const result = await queryCollection('homepage')
+      .where('locale', '=', locale.value)
+      .first()
+    return result
+  },
+  {
+    dedupe: 'defer',
+  }
+)
 </script>
 <template>
-  <div class="flex flex-col" ref="wrapperEl">
-    <ContentRenderer :value="content" />
+  <div class="flex flex-col" ref="wrapperEl" v-if="data">
+    <ContentRenderer :value="data" />
     <!-- <Hero id="hero" ref="heroEl" class="leaving-item" /> -->
     <ProjectList id="projects" ref="projectsEl" class="mb-24 md:mb-2c" />
     <OpenSourceList
