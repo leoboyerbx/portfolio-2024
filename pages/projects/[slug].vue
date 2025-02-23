@@ -1,34 +1,27 @@
 <script setup lang="ts">
-import type { Project } from '~/types/apiTypes'
-
 const { t, locale } = useI18n()
-const { find } = useStrapi()
 
 const { slug } = useRoute().params
-const { data: project } = await useGlobalRefreshAsyncData(
-    `post-single-${slug}-${locale.value}`,
+const { data: project, status, error } = await useAsyncData(
+    `project-${slug}-${locale.value}`,
     async () => {
-        const { data } = await find<Project>('projects', {
-            populate: '*',
-            filters: { slug },
-            locale: locale.value as any,
-        })
-        return data[0] as unknown as Project
-    },
-    {
-        dedupe: 'defer',
+        const result = await queryCollection('projects').path(`/projects/${locale.value}/${slug}`).first()
+        return result
     },
 )
-if (!project?.value) {
+console.log('project', project.value)
+console.log('status', status.value)
+console.log('error', error.value)
+if (!project.value) {
     throw createError({
         statusCode: 404,
-        statusMessage: 'Not Found',
+        statusMessage: 'Project Not Found',
     })
 }
 </script>
 
 <template>
-  <div class="mb-36 flex flex-col gap-1.5c">
+  <div v-if="project" class="mb-36 flex flex-col gap-1.5c">
     <Title>{{ project.name }}</Title>
     <Meta
       name="description"
@@ -39,8 +32,9 @@ if (!project?.value) {
       "
     />
     <ProjectHero :project="project" />
-    <ProjectDescription :project="project" />
+    <ContentRenderer :value="project" :prose="false" class="flex flex-col gap-1.5c" />
+    <!-- <ProjectDescription :project="project" />
     <ProjectVideo v-if="project.video" :project="project" />
-    <ProjectImages v-if="project.images?.length" :project="project" />
+    <ProjectImages v-if="project.images?.length" :project="project" /> -->
   </div>
 </template>

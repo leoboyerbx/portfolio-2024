@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import type { Project } from '~/types/apiTypes'
+import type { ProjectsCollectionItem } from '@nuxt/content'
+
 defineProps<{
-  project: Project
+    project: ProjectsCollectionItem
 }>()
 
 const { target, inView } = useProjectElementInView()
 
 const transition = 'transition-all duration-1000 ease-power4-out'
 </script>
+
 <template>
   <header ref="target" class="pnk-grid pt-36">
     <div
@@ -16,7 +18,7 @@ const transition = 'transition-all duration-1000 ease-power4-out'
       md:col="start-2 span-8"
     >
       <NuxtImg
-        :src="useStrapiMedia(project.thumbnail.url)"
+        :src="project.thumbnail"
         width="1248"
         height="780"
         :alt="`Thumb for ${project.name}`"
@@ -34,7 +36,7 @@ const transition = 'transition-all duration-1000 ease-power4-out'
         class="text-9vw font-black leading-120%"
         :class="
           inView
-            ? 'clip-base ' + transition
+            ? `clip-base ${transition}`
             : 'clip-right translate-x-24 opacity-0'
         "
       >
@@ -45,7 +47,7 @@ const transition = 'transition-all duration-1000 ease-power4-out'
         class="text-6 font-light font-serif md:(pl-8 ml-2c)"
         :class="
           inView
-            ? 'clip-base delay-200 ' + transition
+            ? `clip-base delay-200 ${transition}`
             : 'clip-right translate-x-16 opacity-0'
         "
       >
@@ -62,7 +64,7 @@ const transition = 'transition-all duration-1000 ease-power4-out'
         v-for="(link, i) in project.links"
         :key="link.url"
         :class="
-          inView ? 'opacity-100 ' + transition : 'opacity-0 translate-y-8'
+          inView ? `opacity-100 ${transition}` : 'opacity-0 translate-y-8'
         "
         :style="{ transitionDelay: `${i * 100 + 400}ms` }"
       >

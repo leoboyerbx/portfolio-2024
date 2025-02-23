@@ -1,32 +1,38 @@
 <script setup lang="ts">
 const props = defineProps<{
-  src: string
-  thumb?: string
-  alt: string
+    src: string
+    thumb?: string
+    alt: string
 }>()
 
 const { t } = useI18n()
 const thumbUrl = computed(() => props.thumb || props.src)
 const isOpen = ref(false)
 const hasMoved = ref(false)
-const open = () => {
-  isOpen.value = true
+function open() {
+    isOpen.value = true
 }
-const close = () => {
-  hasMoved.value = false
-  isOpen.value = false
+function close() {
+    hasMoved.value = false
+    isOpen.value = false
 }
 onKeyStroke('Escape', close)
 </script>
+
 <template>
   <a
     :href="src"
     target="_blank"
     class="relative"
-    :title="`Open image in fullscreen`"
+    title="Open image in fullscreen"
     @click.prevent="open()"
   >
-    <NuxtImg :src="thumbUrl" :alt="alt" class="h-full w-full" height="1200" />
+    <NuxtImg
+      :src="thumbUrl"
+      :alt="alt"
+      class="h-full w-full"
+      height="1200"
+    />
     <teleport to="body">
       <transition name="lightbox">
         <div
@@ -35,7 +41,12 @@ onKeyStroke('Escape', close)
           @click="close"
           @mousemove="hasMoved = true"
         >
-          <NuxtImg :src="src" :alt="alt" class="h-8/10 w-8/10 object-contain" height="1200" />
+          <NuxtImg
+            :src="src"
+            :alt="alt"
+            class="h-8/10 w-8/10 object-contain"
+            height="1200"
+          />
           <button
             class="absolute right-4 top-4 flex items-center gap-2 text-sm transition duration-200"
             :class="hasMoved ? 'opacity-80 hover:opacity-100' : 'md:opacity-0'"
@@ -51,6 +62,7 @@ onKeyStroke('Escape', close)
     </teleport>
   </a>
 </template>
+
 <style scoped lang="scss">
 .lightbox-enter-active,
 .lightbox-leave-active {

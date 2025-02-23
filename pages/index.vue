@@ -14,7 +14,7 @@ const openSourceEl = ref()
 const contactEl = ref()
 const mainNav = useMainNavStore()
 onMounted(async () => {
-    await nextTick()
+    await until(() => !!projectsEl.value).toBeTruthy()
     mainNav.setTargets(
         wrapperEl.value.querySelector('#hero'),
         projectsEl.value.$el,
@@ -43,22 +43,13 @@ onMounted(async () => {
 })
 
 const { locale } = useI18n()
-const { data } = await useAsyncData(
-    `homepage-${locale.value}`,
-    async () => {
-        const result = await queryCollection('homepage')
-            .where('locale', '=', locale.value)
-            .first()
-        return result
-    },
-    {
-        dedupe: 'defer',
-    },
-)
+const data = await queryCollection('homepage')
+    .where('locale', '=', locale.value)
+    .first()
 </script>
 
 <template>
-  <div v-if="data" ref="wrapperEl" class="flex flex-col">
+  <div ref="wrapperEl" class="flex flex-col">
     <ContentRenderer :value="data" />
     <!-- <Hero id="hero" ref="heroEl" class="leaving-item" /> -->
     <ProjectList id="projects" ref="projectsEl" class="mb-24 md:mb-2c" />

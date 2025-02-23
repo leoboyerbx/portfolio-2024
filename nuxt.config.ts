@@ -15,7 +15,7 @@ export default defineNuxtConfig({
         '@nuxtjs/strapi',
         '@nuxthub/core',
         '@nuxtjs/plausible',
-        '@layoutaid/nuxt'
+        '@layoutaid/nuxt',
     ],
     css: ['@unocss/reset/tailwind.css', 'assets/global.scss'],
     plausible: {
@@ -34,11 +34,11 @@ export default defineNuxtConfig({
     ],
     strapi: {},
     image: {
-        provider: 'cloudflare',
-        cloudflare: {
-            baseURL: 'https://leoboyer.dev',
-        },
-        domains: ['api.leoboyer.dev'],
+        // provider: 'cloudflare',
+        // cloudflare: {
+        //     baseURL: 'https://leoboyer.dev',
+        // },
+        // domains: ['api.leoboyer.dev'],
     },
     i18n: {
         strategy: 'prefix_except_default',

@@ -22,12 +22,11 @@ export default defineContentConfig({
                 slug: z.string(),
                 baseline: z.string(),
                 links: z.array(z.object({
-                    name: z.string(),
+                    title: z.string(),
                     url: z.string(),
+                    newTab: z.boolean(),
                 })),
                 thumbnail: z.string().editor({ input: 'media' }),
-                skillsTitle: z.string(),
-                skills: z.array(z.string()),
                 images: z.array(z.string()).editor({ input: 'media' }),
                 // video: z.object({
                 //     id: z.number(),

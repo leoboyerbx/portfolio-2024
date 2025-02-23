@@ -1,10 +1,11 @@
 <script setup lang="ts">
 defineProps<{
-  images: string[]
+    images: string[]
 }>()
 const { target, inView } = useProjectElementInView()
 const transition = 'transition-all duration-1000 ease-power4-out'
 </script>
+
 <template>
   <div ref="target" class="gallery grid grid-cols-8 gap-4">
     <ImageLightbox
@@ -15,13 +16,14 @@ const transition = 'transition-all duration-1000 ease-power4-out'
       class="img"
       :class="
         inView
-          ? 'clip-base opacity-100 ' + transition
+          ? `clip-base opacity-100 ${transition}`
           : ' opacity-0 clip-bottom'
       "
       :style="{ transitionDelay: `${images.indexOf(image) * 100}ms` }"
     />
   </div>
 </template>
+
 <style scoped lang="scss">
 .gallery {
   .img {
