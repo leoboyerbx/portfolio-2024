@@ -3,13 +3,13 @@ import type { NuxtLink } from '#build/components'
 import { getLenis } from '~/plugins/lenis.client'
 
 const props = defineProps<{
-  project: Project
+    project: Project
 }>()
 
 const thumbnail = useStrapiMedia(props.project.thumbnail.url)
 
 const { target, inView } = useElementInView({
-  amount: 0.5,
+    amount: 0.5,
 })
 
 const transition = 'transition-all duration-1000 ease-power4-out'
@@ -18,35 +18,33 @@ const transitions = useTransitionsStore()
 const linkElement = ref<HTMLElement>()
 const lenis = getLenis()
 
-const onClickLink = async (
-  e: MouseEvent,
-  navigate: (e: MouseEvent) => void
-) => {
-  const trigger = linkElement.value!
-  transitions.isTransitionningToProject = true
-  transitions.isLeaving = true
-  navigate(e) // Trigger next page load, but the router will await for the bus
+async function onClickLink(e: MouseEvent, navigate: (e: MouseEvent) => void) {
+    const trigger = linkElement.value!
+    transitions.isTransitionningToProject = true
+    transitions.isLeaving = true
+    navigate(e) // Trigger next page load, but the router will await for the bus
 
-  trigger.classList.add('leaving')
-  await new Promise((resolve) =>
-    lenis.scrollTo(trigger, {
-      duration: 0.9,
-      easing: power3.inOut.toFunction(),
-      lock: true,
-      onComplete: resolve,
-      offset: -window.innerHeight / 2 + trigger.offsetHeight / 2,
-    })
-  )
+    trigger.classList.add('leaving')
+    await new Promise(resolve =>
+        lenis.scrollTo(trigger, {
+            duration: 0.9,
+            easing: power3.inOut.toFunction(),
+            lock: true,
+            onComplete: resolve,
+            offset: -window.innerHeight / 2 + trigger.offsetHeight / 2,
+        }),
+    )
 
-  transitions.linkRect = trigger
-    .querySelector('.thumb')
-    ?.getBoundingClientRect()
+    transitions.linkRect = trigger
+        .querySelector('.thumb')
+        ?.getBoundingClientRect()
 
-  transitions.isLeaving = false // This allows the transitions hook to continue
+    transitions.isLeaving = false // This allows the transitions hook to continue
 }
 
 const localePath = useLocalePath()
 </script>
+
 <template>
   <NuxtLink
     v-slot="{ href, navigate }"
@@ -80,10 +78,10 @@ const localePath = useLocalePath()
           />
         </header>
         <section
-          class="text-content flex flex-col items-start justify-end md:group-even:(items-end text-right) transition duration-200 text-slate-100/80 group-hover:text-slate-50"
+          class="text-content flex flex-col items-start justify-end text-slate-100/80 transition duration-200 group-hover:text-slate-50 md:group-even:(items-end text-right)"
         >
           <h3
-            class="block text-3xl font-bold delay-150 lg:text-6xl md:text-5xl text-current"
+            class="block text-3xl text-current font-bold delay-150 lg:text-6xl md:text-5xl"
             :class="[
               inView
                 ? 'clip-base'
@@ -94,7 +92,7 @@ const localePath = useLocalePath()
             {{ project.name }}
           </h3>
           <p
-            class="font-light delay-300 lg:text-xl lt-md:text-sm text-current"
+            class="text-current font-light delay-300 lg:text-xl lt-md:text-sm"
             :class="[inView ? '' : 'opacity-0 translate-y-4', transition]"
           >
             {{ project.baseline }}
@@ -104,6 +102,7 @@ const localePath = useLocalePath()
     </a>
   </NuxtLink>
 </template>
+
 <style lang="scss">
 .project-link {
   @media (hover: hover) and (pointer: fine) {

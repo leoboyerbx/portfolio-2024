@@ -3,11 +3,12 @@ import { getLenis } from '~/plugins/lenis.client'
 
 // @unocss-include
 export default defineNuxtRouteMiddleware((to, from) => {
-    if (process.server) return
+    if (process.server)
+        return
 
     const store = useTransitionsStore()
 
-    if (store.isTransitionningToProject) {
+    if (false && store.isTransitionningToProject) {
         from.meta.pageTransition = {
             name: 'toProject',
             mode: 'out-in',
@@ -50,7 +51,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
           width: ${targetRect.width}px;
           height: ${targetRect.height}px;
           transform-origin: 0 0;
-        `
+        `,
                 )
 
                 const lenis = getLenis()
@@ -66,13 +67,13 @@ export default defineNuxtRouteMiddleware((to, from) => {
                             `translate(${invertX}px, ${invertY}px)`,
                             'translate(0, 0) scale(1)',
                         ],
-                        width: [linkThumbRect.width + 'px', targetRect.width + 'px'],
-                        height: [linkThumbRect.height + 'px', targetRect.height + 'px'],
+                        width: [`${linkThumbRect.width}px`, `${targetRect.width}px`],
+                        height: [`${linkThumbRect.height}px`, `${targetRect.height}px`],
                     },
                     {
                         duration: 0.9,
                         easing: power4.inOut,
-                    }
+                    },
                 )
                 await animation.finished
 
@@ -82,7 +83,8 @@ export default defineNuxtRouteMiddleware((to, from) => {
                 done()
             },
         }
-    } else {
+    }
+    else {
         to.meta.pageTransition = {
             name: 'default-page',
             mode: 'out-in',

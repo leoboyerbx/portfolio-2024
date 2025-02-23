@@ -8,6 +8,9 @@ const { data: project, status, error } = await useAsyncData(
         const result = await queryCollection('projects').path(`/projects/${locale.value}/${slug}`).first()
         return result
     },
+    {
+        dedupe: 'defer',
+    },
 )
 console.log('project', project.value)
 console.log('status', status.value)
