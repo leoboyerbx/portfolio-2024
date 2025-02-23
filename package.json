@@ -1,7 +1,11 @@
 {
   "name": "client",
-  "private": true,
   "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
   "scripts": {
     "build": "STRAPI_URL=https://api.leoboyer.dev nuxt build",
     "dev": "nuxt dev",
@@ -10,10 +14,6 @@
     "generate:prod": "STRAPI_URL=https://api.leoboyer.dev nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
-  },
-  "engines": {
-    "node": ">=22",
-    "pnpm": ">=10"
   },
   "dependencies": {
     "@extractus/oembed-extractor": "^4.0.6",
@@ -25,7 +25,7 @@
     "@vueuse/nuxt": "^12.7.0",
     "lenis": "^1.1.20",
     "motion": "^10.18.0",
-    "pinia": "^2.3.1",
+    "pinia": "^3.0.1",
     "qs": "^6.14.0",
     "splitting": "^1.1.0",
     "vue": "^3.5.13",
@@ -49,7 +49,7 @@
     "@unocss/eslint-config": "0.65.0-beta.3",
     "@unocss/nuxt": "0.65.0-beta.3",
     "@unocss/reset": "0.65.0-beta.3",
-    "eslint": "^8.57.1",
+    "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "i": "^0.3.7",

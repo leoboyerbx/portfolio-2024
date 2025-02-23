@@ -1,5 +1,5 @@
 <script setup lang="ts">
 await navigateTo(useLocalePath()('/?scrollTo=projects'), {
-  replace: true,
+    replace: true,
 })
 </script>

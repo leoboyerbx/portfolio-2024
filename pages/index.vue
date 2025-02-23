@@ -2,10 +2,10 @@
 import { getLenis } from '~/plugins/lenis.client'
 
 definePageMeta({
-  isHomePage: true,
+    isHomePage: true,
 })
 useHead({
-  titleTemplate: '%siteName',
+    titleTemplate: '%siteName',
 })
 
 const wrapperEl = ref()
@@ -14,50 +14,51 @@ const openSourceEl = ref()
 const contactEl = ref()
 const mainNav = useMainNavStore()
 onMounted(async () => {
-  await nextTick()
-  mainNav.setTargets(
-    wrapperEl.value.querySelector('#hero'),
-    projectsEl.value.$el,
-    openSourceEl.value.$el,
-    contactEl.value.$el
-  )
+    await nextTick()
+    mainNav.setTargets(
+        wrapperEl.value.querySelector('#hero'),
+        projectsEl.value.$el,
+        openSourceEl.value.$el,
+        contactEl.value.$el,
+    )
 })
 
 onUnmounted(() => {
-  mainNav.setTargets()
+    mainNav.setTargets()
 })
 
 const route = useRoute()
 const scrollTo = route.query.scrollTo as string
 useRouter().replace(route.path)
 onMounted(async () => {
-  if (scrollTo) {
-    const target = document.getElementById(scrollTo)
-    if (target) {
-      getLenis().scrollTo(target, {
-        immediate: true,
-        offset: -128,
-      })
+    if (scrollTo) {
+        const target = document.getElementById(scrollTo)
+        if (target) {
+            getLenis().scrollTo(target, {
+                immediate: true,
+                offset: -128,
+            })
+        }
     }
-  }
 })
 
 const { locale } = useI18n()
 const { data } = await useAsyncData(
-  'homepage-' + locale.value,
-  async () => {
-    const result = await queryCollection('homepage')
-      .where('locale', '=', locale.value)
-      .first()
-    return result
-  },
-  {
-    dedupe: 'defer',
-  }
+    `homepage-${locale.value}`,
+    async () => {
+        const result = await queryCollection('homepage')
+            .where('locale', '=', locale.value)
+            .first()
+        return result
+    },
+    {
+        dedupe: 'defer',
+    },
 )
 </script>
+
 <template>
-  <div class="flex flex-col" ref="wrapperEl" v-if="data">
+  <div v-if="data" ref="wrapperEl" class="flex flex-col">
     <ContentRenderer :value="data" />
     <!-- <Hero id="hero" ref="heroEl" class="leaving-item" /> -->
     <ProjectList id="projects" ref="projectsEl" class="mb-24 md:mb-2c" />
