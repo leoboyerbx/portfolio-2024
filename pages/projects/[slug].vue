@@ -2,7 +2,7 @@
 const { t, locale } = useI18n()
 
 const { slug } = useRoute().params
-const { data: project, status, error } = await useAsyncData(
+const { data: project } = await useAsyncData(
     `project-${slug}-${locale.value}`,
     async () => {
         const result = await queryCollection('projects').path(`/projects/${locale.value}/${slug}`).first()
@@ -12,9 +12,7 @@ const { data: project, status, error } = await useAsyncData(
         dedupe: 'defer',
     },
 )
-console.log('project', project.value)
-console.log('status', status.value)
-console.log('error', error.value)
+
 if (!project.value) {
     throw createError({
         statusCode: 404,
