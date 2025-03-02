@@ -76,6 +76,9 @@ export default defineNuxtConfig({
         pageTransition: { name: 'page', mode: 'out-in' },
     },
 
+    devServer: {
+        port: 3001,
+    },
     nitro: {
         prerender: {
             routes: [
