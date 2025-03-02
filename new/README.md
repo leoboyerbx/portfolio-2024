@@ -1,75 +1,7 @@
-# Nuxt Content Starter
+# Portfolio
 
-Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn more.
+This is my current portfolio, available on [www.leoboyer.dev](https://www.leoboyer.dev/)
 
-## Setup
+## Tech stack
 
-Make sure to install dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+The website is build with Nuxt.js and currently deployed on Cloudflare statically. The back-office and API is a Strapi instance running on an on-premise VPS. The static deployments allows it to go down without any downtime on the front-end side (as long as Cloudflare is up !).

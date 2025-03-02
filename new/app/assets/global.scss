@@ -1,0 +1,126 @@
+@import './fonts/Fragen/Fragen.css';
+@import './fonts/Satoshi/Satoshi.css';
+
+body {
+    @apply font-sans text-slate-50 bg-slate-950;
+}
+
+#nuxt-devtools-container,
+#nuxt-devtools-container * {
+    outline: none !important;
+}
+
+/* Default transition */
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.15s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+
+.btn-animation:not(:disabled) {
+    animation: buttonpop 0.25s ease-out;
+}
+
+.btn-animation:active:hover:not(:disabled),
+.btn-animation:active:focus:not(:disabled) {
+    animation: none;
+    transform: scale(0.95);
+}
+
+@keyframes buttonpop {
+    0% {
+        transform: scale(0.95);
+    }
+
+    40% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.grid-centered-4 {
+    @apply col-start-2 col-span-12 lg:(col-start-3 col-span-10) xl:(col-start-4 col-span-8) 2xl:(col-start-5 col-span-6) 3xl:(col-start-6 col-span-4);
+}
+
+.grid-centered-6 {
+    @apply col-start-2 col-span-12 lg:(col-start-3 col-span-10) xl:(col-start-4 col-span-8) 2xl:(col-start-5 col-span-6);
+}
+
+.grid-centered-8 {
+    @apply col-start-2 col-span-12 lg:(col-start-3 col-span-10) xl:(col-start-4 col-span-8);
+}
+
+.grid-centered-10 {
+    @apply col-start-2 col-span-12 lg:(col-start-3 col-span-10);
+}
+
+.grid-centered-12,
+.wrap {
+    @apply col-start-2 col-span-12;
+}
+
+.section-title {
+    @apply font-black text-4xl lg:text-6xl text-balance;
+
+    em,
+    b {
+        @apply font-serif font-light italic
+    }
+}
+
+// Wysi styles
+
+.prose {
+    @apply font-serif font-extralight;
+
+    h2,
+    h3,
+    h4 {
+        @apply font-medium;
+    }
+}
+
+.kbd {
+    @apply text-9px uppercase font-sans px-2 py-0 rounded border;
+    border-color: color-mix(in srgb, currentColor 50%, transparent);
+    background-color: color-mix(in srgb, currentColor 20%, transparent);
+}
+
+
+.default-page-enter-active,
+.default-page-leave-active {
+    transition: all 0.2s;
+}
+
+.default-page-enter-from,
+.default-page-leave-to {
+    opacity: 0;
+    filter: blur(0.5rem);
+}
+
+// To project page transition
+.leaving-page {
+    .leaving-item:not(.project-link.leaving) {
+        @apply transition-opacity duration-700 opacity-0 delay-0;
+    }
+}
+
+
+.nav-bg {
+    @apply border-slate-400/50 bg-slate-400/20 backdrop-blur-lg border;
+
+    &.transparent {
+        @apply md:(bg-transparent border-transparent);
+    }
+}
+
+.nav-link {
+    @apply text-slate-100/80 font-medium rounded-lg transition duration-200 \@hover:(text-white bg-white/20) active:(text-white bg-white/20);
+}
