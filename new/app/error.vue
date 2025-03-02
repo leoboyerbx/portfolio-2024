@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Define page meta to override any inherited meta
 const error = useError()
 if (!error.value) {
     await navigateTo('/')
@@ -12,6 +13,14 @@ const reversedCode = computed(() =>
 console.error('Error Below')
 console.error(error)
 const localePath = useLocalePath()
+
+const nav = useMainNavStore()
+onMounted(() => {
+    nav.hideNav = true
+})
+onBeforeUnmount(() => {
+    nav.hideNav = false
+})
 </script>
 
 <template>

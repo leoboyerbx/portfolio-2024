@@ -2,6 +2,7 @@
 import { breakpointsTailwind } from '@vueuse/core'
 import { getLenis } from '~/plugins/lenis.client'
 
+const store = useMainNavStore()
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isMobile = breakpoints.smaller('sm')
 
@@ -28,8 +29,7 @@ const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 0)
 
 const route = useRoute()
-const isHome = computed(() => !!route.meta.isHomePage)
-// const isHome = ref(true)
+const showNav = computed(() => !!route.meta.isHomePage && !store.hideNav)
 
 const navEl = ref<HTMLElement>()
 const menuEl = ref<HTMLElement>()
@@ -44,7 +44,7 @@ const responsiveMenuWith = computed(() =>
 const width = computed(() => {
     if (!navEl.value)
         return 0
-    return Math.round(isHome.value ? responsiveMenuWith.value : backWidth.value)
+    return Math.round(showNav.value ? responsiveMenuWith.value : backWidth.value)
 })
 
 const router = useRouter()
@@ -58,8 +58,6 @@ function goBack() {
     }
 }
 
-// This variable doesn't need to be reactive
-const store = useMainNavStore()
 const offset = 192
 const currentTarget = computedWithControl(
     () => [y.value, isMobile.value, store.distancesFromTop],
@@ -105,17 +103,17 @@ const mounted = useMounted()
       :style="{
         width: `${width}px`,
         height: `${isMobile && mobileMenuOpen ? listHeight + 24 : 56}px`,
-        left: isHome ? '50%' : '24px',
-        transform: isHome ? 'translateX(-50%)' : 'none',
+        left: showNav ? '50%' : '24px',
+        transform: showNav ? 'translateX(-50%)' : 'none',
       }"
-      :class="{ transparent: !scrolled && isHome }"
+      :class="{ transparent: !scrolled && showNav }"
     >
       <button
         ref="backEl"
         :aria-label="t('nav.backToHome')"
         class="child-transition btn-animation block flex-shrink-0 px-3.5"
         :style="{
-          transform: isHome ? `translateX(-100%)` : '',
+          transform: showNav ? `translateX(-100%)` : '',
         }"
         @click="goBack"
       >
@@ -128,12 +126,12 @@ const mounted = useMounted()
         lt-sm="w-full"
         sm="px-8 py-2 gap-2"
         :style="{
-          transform: isHome ? `translateX(-${backWidth}px)` : '',
+          transform: showNav ? `translateX(-${backWidth}px)` : '',
         }"
       >
         <div
           class="h-8 flex items-center transition-opacity duration-200 -ml-1 sm:hidden"
-          :class="{ 'opacity-0': !isHome }"
+          :class="{ 'opacity-0': !showNav }"
         >
           <button
             class="nav-link btn-animation grid h-7 w-7 flex-shrink-0 place-content-center"
@@ -175,7 +173,7 @@ const mounted = useMounted()
                 :key="linkId"
                 class="flex-shrink-0 transition-opacity duration-300"
                 :class="
-                  (isHome && i === currentTarget) || mobileMenuOpen
+                  (showNav && i === currentTarget) || mobileMenuOpen
                     ? 'delay-100'
                     : 'lt-sm:opacity-0 delay-0'
                 "

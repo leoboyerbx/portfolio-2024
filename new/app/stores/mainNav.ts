@@ -21,5 +21,7 @@ export const useMainNavStore = defineStore('mainNav', () => {
         targets.value = elements
     }
 
-    return { targets, distancesFromTop, setTargets }
+    const hideNav = ref(false)
+
+    return { targets, distancesFromTop, setTargets, hideNav }
 })

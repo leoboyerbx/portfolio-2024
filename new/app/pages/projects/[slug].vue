@@ -14,7 +14,7 @@ const { data: project } = await useAsyncData(
 )
 
 if (!project.value) {
-    throw createError({
+    await showError({
         statusCode: 404,
         statusMessage: 'Project Not Found',
     })
