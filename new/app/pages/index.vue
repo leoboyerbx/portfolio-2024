@@ -43,11 +43,17 @@ const { locale } = useI18n()
 const data = await queryCollection('homepage')
     .where('locale', '=', locale.value)
     .first()
+
+// tmp
+const localePath = useLocalePath()
 </script>
 
 <template>
   <div ref="wrapperEl" class="flex flex-col">
     <ContentRenderer :value="data" />
+    <NuxtLink :to="localePath('/projects/journiz')">
+      Go debug
+    </NuxtLink>
     <!-- <Hero id="hero" ref="heroEl" class="leaving-item" /> -->
     <!-- <ProjectList id="projects" ref="projectsEl" class="mb-24 md:mb-2c" />
     <OpenSourceList
