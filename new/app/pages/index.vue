@@ -40,9 +40,16 @@ onMounted(async () => {
 })
 
 const { locale } = useI18n()
-const data = await queryCollection('homepage')
-    .where('locale', '=', locale.value)
-    .first()
+const { data } = await useAsyncData(
+    `homepage-${locale.value}`,
+    async () => {
+        const result = await queryCollection('homepage').where('locale', '=', locale.value).first()
+        return result
+    },
+    {
+        dedupe: 'defer',
+    },
+)
 
 // tmp
 const localePath = useLocalePath()
@@ -50,7 +57,7 @@ const localePath = useLocalePath()
 
 <template>
   <div ref="wrapperEl" class="flex flex-col">
-    <ContentRenderer :value="data" />
+    <ContentRenderer :value="(data as any)" />
     <NuxtLink :to="localePath('/projects/journiz')">
       Go debug
     </NuxtLink>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { data: homepage } = await useHomepage()
 </script>
+
 <template>
   <section v-if="homepage" class="pnk-grid pb-6">
     <header class="grid-centered-8">
