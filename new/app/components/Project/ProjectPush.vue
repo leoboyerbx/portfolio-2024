@@ -2,11 +2,14 @@
 import type { NuxtLink } from '#build/components'
 import { getLenis } from '~/plugins/lenis.client'
 
-const props = defineProps<{
-    project: Project
+const { project } = defineProps<{
+    project: {
+        slug: string
+        name: string
+        baseline: string
+        thumbnail: string
+    }
 }>()
-
-const thumbnail = useStrapiMedia(props.project.thumbnail.url)
 
 const { target, inView } = useElementInView({
     amount: 0.5,
@@ -15,7 +18,7 @@ const { target, inView } = useElementInView({
 const transition = 'transition-all duration-1000 ease-power4-out'
 
 const transitions = useTransitionsStore()
-const linkElement = ref<HTMLElement>()
+const linkElement = useTemplateRef('linkElement')
 const lenis = getLenis()
 
 async function onClickLink(e: MouseEvent, navigate: (e: MouseEvent) => void) {
@@ -66,7 +69,7 @@ const localePath = useLocalePath()
           :class="[inView ? 'scale-100' : 'scale-75 opacity-0', transition]"
         >
           <NuxtImg
-            :src="thumbnail"
+            :src="project.thumbnail"
             width="1920"
             height="1200"
             :alt="`Thumb for ${project.name}`"

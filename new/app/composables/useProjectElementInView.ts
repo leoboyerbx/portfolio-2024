@@ -14,7 +14,7 @@ export function useProjectElementInView(options: Parameters<typeof onElementInVi
             return
         cleanup = motioninView(
             el,
-            (_, entry: IntersectionObserverEntry) => {
+            (entry: IntersectionObserverEntry) => {
                 inView.value = entry.isIntersecting
                 if (options.leaving) {
                     return () => {

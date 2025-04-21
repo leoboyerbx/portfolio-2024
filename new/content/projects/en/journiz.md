@@ -1,4 +1,5 @@
 ---
+slug: journiz
 locale: en
 createdAt: 2024-04-09
 updatedAt: 2025-02-22

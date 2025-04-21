@@ -2,7 +2,7 @@ import { inView } from 'motion'
 
 export function onElementInView(
     target: MaybeRef<HTMLElement | undefined>,
-    callback: (element: Element, entry: IntersectionObserverEntry) => any,
+    callback: (entry: IntersectionObserverEntry) => any,
     options: Parameters<typeof inView>[2] = {},
 ) {
     let cleanup: VoidFunction
@@ -25,7 +25,7 @@ export default function useElementInView(
     const inView = ref(false)
     onElementInView(
         target,
-        (_, entry) => {
+        (entry) => {
             inView.value = entry.isIntersecting
             if (options.leaving) {
                 return () => {
