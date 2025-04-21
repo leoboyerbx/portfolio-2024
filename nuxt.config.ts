@@ -37,7 +37,10 @@ export default defineNuxtConfig({
     },
     hub: {},
     content: {
-    },
+      preview: {
+        api: 'https://api.nuxt.studio'
+      }
+    }
     components: [
         {
             path: '~/components',
