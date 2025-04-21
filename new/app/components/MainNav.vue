@@ -117,7 +117,7 @@ const mounted = useMounted()
         }"
         @click="goBack"
       >
-        <span class="i-uil:arrow-left block text-28px"></span>
+        <Icon name="i-uil:arrow-left" class="block text-28px" />
       </button>
 
       <div
@@ -138,22 +138,24 @@ const mounted = useMounted()
             :aria-label="t('nav.openMenu')"
             @click="mobileMenuOpen = !mobileMenuOpen"
           >
-            <span
-              class="i-uil:bars col-start-1 row-start-1 block text-20px transition duration-200"
+            <Icon
+              name="i-uil:bars"
+              class="col-start-1 row-start-1 block text-20px transition duration-200"
               :class="
                 mobileMenuOpen
                   ? 'scale-0 ease-power2-in'
                   : 'delay-100 ease-power2-out'
               "
-            ></span>
-            <span
-              class="i-uil:times col-start-1 row-start-1 block text-22px transition duration-200"
+            />
+            <Icon
+              name="i-uil:times"
+              class="col-start-1 row-start-1 block text-22px transition duration-200"
               :class="
                 !mobileMenuOpen
                   ? 'scale-0 ease-power2-in'
                   : 'delay-100 ease-power2-out'
               "
-            ></span>
+            />
           </button>
         </div>
         <transition mode="out-in">

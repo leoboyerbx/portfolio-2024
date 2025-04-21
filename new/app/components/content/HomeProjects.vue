@@ -22,7 +22,7 @@ const { data: projects } = await useAsyncData(
 </script>
 
 <template>
-  <section class="pnk-grid w-full">
+  <section id="projects" class="pnk-grid w-full">
     <ScrollReveal class="grid-centered-8 mb-1.5c">
       <h2
         class="section-title leaving-item text-center"

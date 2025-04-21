@@ -28,12 +28,23 @@ export default defineContentConfig({
                 })),
                 thumbnail: z.string().editor({ input: 'media' }),
                 images: z.array(z.string()).editor({ input: 'media' }),
-                // video: z.object({
-                //     id: z.number(),
-                //     title: z.string(),
-                //     embed: z.string(),
-                //     description: z.string(),
-                // }),
+            }),
+        }),
+        global: defineCollection({
+            type: 'data',
+            source: 'global/*.yml',
+            schema: z.object({
+                locale: z.string(),
+                resume: z.object({
+                    title: z.string(),
+                    file: z.string().editor({ input: 'media' }),
+                }),
+                contacts: z.array(z.object({
+                    icon: z.string().editor({ input: 'icon' }),
+                    title: z.string(),
+                    url: z.string(),
+                    extendedOnly: z.boolean().optional(),
+                })),
             }),
         }),
     },

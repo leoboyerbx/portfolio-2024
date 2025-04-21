@@ -18,8 +18,19 @@ export default defineNuxtConfig({
         '@nuxthub/core',
         '@nuxtjs/plausible',
         '@layoutaid/nuxt',
+        '@nuxt/icon',
     ],
     css: ['@unocss/reset/tailwind.css', '~/assets/global.scss'],
+    unocss: {
+        content: {
+            pipeline: {
+                include: [
+                    /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/,
+                    'content/**/*.{yml,md}',
+                ],
+            },
+        },
+    },
     plausible: {
         domain: 'leoboyer.dev',
         apiHost: 'https://stats.pnk.studio',
@@ -40,6 +51,11 @@ export default defineNuxtConfig({
         //     baseURL: 'https://leoboyer.dev',
         // },
         // domains: ['api.leoboyer.dev'],
+    },
+    icon: {
+        serverBundle: {
+            collections: ['uil'],
+        },
     },
     i18n: {
         strategy: 'prefix_except_default',

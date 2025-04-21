@@ -1,30 +1,31 @@
 <script setup lang="ts">
 const props = defineProps({
-  href: {
-    type: String,
-    required: false,
-    default: null,
-  },
-  color: {
-    type: String as PropType<'primary' | 'secondary' | 'neutral'>,
-    required: false,
-    default: 'neutral',
-  },
-  icon: {
-    type: String,
-    required: false,
-    default: null,
-  },
-  iconBefore: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
+    href: {
+        type: String,
+        required: false,
+        default: null,
+    },
+    color: {
+        type: String as PropType<'primary' | 'secondary' | 'neutral'>,
+        required: false,
+        default: 'neutral',
+    },
+    icon: {
+        type: String,
+        required: false,
+        default: null,
+    },
+    iconBefore: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
 })
 const tag = props.href ? 'a' : 'button'
 
 const hasBeenClicked = ref(false)
 </script>
+
 <template>
   <component
     v-bind="props"
@@ -34,13 +35,15 @@ const hasBeenClicked = ref(false)
     @click="hasBeenClicked = true"
   >
     <slot />
-    <span
+    <Icon
       v-if="icon"
-      :class="[icon, { '-order-1': iconBefore }]"
+      :name="icon"
+      :class="{ '-order-1': iconBefore }"
       class="text-sm"
-    ></span>
+    />
   </component>
 </template>
+
 <style scoped>
 .pnk-btn-neutral {
   --color: theme('colors.slate.50');
@@ -61,6 +64,7 @@ const hasBeenClicked = ref(false)
     transparent
   );
 }
+
 .pnk-btn:hover {
   --bg-opacity: 10%;
 }

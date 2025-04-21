@@ -1,36 +1,11 @@
 <script setup lang="ts">
-const props = defineProps<{
-  showPhone?: boolean
+const { extended } = defineProps<{
+    extended?: boolean
 }>()
-const { t } = useI18n()
-const links = computed(() => {
-  const base = [
-    {
-      icon: 'i-uil:github',
-      title: 'GitHub',
-      url: 'https://github.com/leoboyerbx',
-    },
-    {
-      icon: 'i-uil:linkedin',
-      title: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/leoboyerbx',
-    },
-    {
-      icon: 'i-uil:envelope',
-      title: t('contact.email'),
-      url: 'mailto:contact@leoboyer.fr',
-    },
-  ]
-  if (props.showPhone) {
-    base.push({
-      icon: 'i-uil:phone',
-      title: t('contact.phone'),
-      url: 'tel:+33782459332',
-    })
-  }
-  return base
-})
+const global = await useGlobal()
+const links = computed(() => global.value?.contacts.filter(contact => extended || !contact.extendedOnly))
 </script>
+
 <template>
   <div class="flex items-center gap-0.3em">
     <a
@@ -40,10 +15,11 @@ const links = computed(() => {
       :title="link.title"
       target="_blank"
     >
-      <span :class="link.icon" class="block"></span>
+      <Icon :name="link.icon" class="block" />
     </a>
   </div>
 </template>
+
 <style scoped>
 a {
   @apply opacity-50 transition duration-300 hover:opacity-100;

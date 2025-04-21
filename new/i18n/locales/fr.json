@@ -8,10 +8,6 @@
     "contact": "Contact"
   },
   "wip": "Ce portfolio est en cours de refonte. Il sera bientôt de retour !",
-  "contact": {
-    "email": "Envoyez-moi un email !",
-    "phone": "Appelez-moi !"
-  },
   "project": {
     "description": "Venez découvrir le projet {nameAndBaseline}"
   },

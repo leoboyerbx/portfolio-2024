@@ -1,16 +1,18 @@
 <script setup lang="ts">
 defineProps<{
-  work: OpenSourceProject
+    work: OpenSourceProject
 }>()
 const innerDescription = ref<HTMLElement>()
 const descriptionHeight = ref('24px')
-const updateHeight = () => {
-  if (!innerDescription.value) return
-  descriptionHeight.value = innerDescription.value.clientHeight + 'px'
+function updateHeight() {
+    if (!innerDescription.value)
+        return
+    descriptionHeight.value = `${innerDescription.value.clientHeight}px`
 }
 onMounted(updateHeight)
 useEventListener('resize', updateHeight)
 </script>
+
 <template>
   <a
     :href="work.url"
@@ -24,9 +26,10 @@ useEventListener('resize', updateHeight)
       >
         {{ work.name }}
       </span>
-      <span
-        class="i-uil:arrow-up-right block text-24px text-slate-100/70 transition duration-300 group-hover:(translate-x-1 text-slate-50 -translate-y-1)"
-      ></span>
+      <Icon
+        name="i-uil:arrow-up-right"
+        class="block text-24px text-slate-100/70 transition duration-300 group-hover:(translate-x-1 text-slate-50 -translate-y-1)"
+      />
     </span>
     <span
       class="outer-description overflow-clip text-slate-400 font-extralight transition-all duration-500"
@@ -37,6 +40,7 @@ useEventListener('resize', updateHeight)
     </span>
   </a>
 </template>
+
 <style scoped>
 @screen md {
   .outer-description {

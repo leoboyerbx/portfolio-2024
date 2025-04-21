@@ -1,0 +1,19 @@
+# @unocss-include
+locale: en
+resume:
+    title: Resume
+    url: /files/en/Resume_Leo_Boyer.pdf
+contacts:
+  - icon: i-uil:github
+    title: GitHub
+    url: https://github.com/leoboyerbx
+  - icon: i-uil:linkedin
+    title: LinkedIn
+    url: https://www.linkedin.com/in/leoboyerbx
+  - icon: i-uil:envelope
+    title: Send me an email !
+    url: mailto:contact@leoboyer.fr
+  - icon: i-uil:phone
+    title: Call me !
+    url: tel:+33782459332
+    extendedOnly: true
