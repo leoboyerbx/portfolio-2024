@@ -95,15 +95,4 @@ export default defineNuxtConfig({
         // pageTransition: { name: 'page', mode: 'out-in' },
     },
 
-    // nitro: {
-    //     prerender: {
-    //         routes: [
-    //             '/api/resume',
-    //             '/api/resume.pdf',
-    //             '/api/fr/resume.pdf',
-    //             '/api/en/resume.pdf',
-    //         ],
-    //         autoSubfolderIndex: false,
-    //     },
-    // },
 })
