@@ -14,12 +14,12 @@ console.error('Error Below')
 console.error(error)
 const localePath = useLocalePath()
 
-const nav = useMainNavStore()
+const nav = useMainNav()
 onMounted(() => {
-    nav.hideNav = true
+    nav.value.hideNav = true
 })
 onBeforeUnmount(() => {
-    nav.hideNav = false
+    nav.value.hideNav = false
 })
 </script>
 

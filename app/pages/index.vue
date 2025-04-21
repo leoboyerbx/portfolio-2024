@@ -9,19 +9,20 @@ useHead({
 })
 
 const wrapperEl = ref()
-const mainNav = useMainNavStore()
+const mainNav = useMainNav()
 onMounted(async () => {
     await until(() => !!wrapperEl.value).toBeTruthy()
-    mainNav.setTargets(
+    mainNav.value.targets = [
         wrapperEl.value.querySelector('#hero'),
+        wrapperEl.value.querySelector('#projects'),
         // projectsEl.value.$el,
         // openSourceEl.value.$el,
         // contactEl.value.$el,
-    )
+    ]
 })
 
 onUnmounted(() => {
-    mainNav.setTargets()
+    mainNav.value.targets = []
 })
 
 const route = useRoute()
@@ -55,6 +56,7 @@ const { data } = await useAsyncData(
 <template>
   <div ref="wrapperEl" class="flex flex-col">
     <ContentRenderer :value="(data as any)" />
+    <div class="h-100"></div>
     <!-- <NuxtLink :to="localePath('/projects/journiz')">
       Go debug
     </NuxtLink> -->

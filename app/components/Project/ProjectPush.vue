@@ -17,14 +17,14 @@ const { target, inView } = useElementInView({
 
 const transition = 'transition-all duration-1000 ease-power4-out'
 
-const transitions = useTransitionsStore()
+const transitions = useTransitions()
 const linkElement = useTemplateRef('linkElement')
 const lenis = getLenis()
 
 async function onClickLink(e: MouseEvent, navigate: (e: MouseEvent) => void) {
     const trigger = linkElement.value!
-    transitions.isTransitionningToProject = true
-    transitions.isLeaving = true
+    transitions.value.isTransitionningToProject = true
+    transitions.value.isLeaving = true
     navigate(e) // Trigger next page load, but the router will await for the bus
 
     trigger.classList.add('leaving')
@@ -38,11 +38,11 @@ async function onClickLink(e: MouseEvent, navigate: (e: MouseEvent) => void) {
         }),
     )
 
-    transitions.linkRect = trigger
+    transitions.value.linkRect = trigger
         .querySelector('.thumb')
         ?.getBoundingClientRect()
 
-    transitions.isLeaving = false // This allows the transitions hook to continue
+    transitions.value.isLeaving = false // This allows the transitions hook to continue
 }
 
 const localePath = useLocalePath()

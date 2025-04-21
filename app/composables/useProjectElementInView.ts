@@ -26,13 +26,13 @@ export function useProjectElementInView(options: Parameters<typeof onElementInVi
         )
     }
 
-    const store = useTransitionsStore()
-    if (!store.isTransitionningToProject) {
+    const store = useTransitions()
+    if (!store.value.isTransitionningToProject) {
         onMounted(startWatchingElement)
     }
     else {
         watch(
-            () => store.isTransitionningToProject,
+            () => store.value.isTransitionningToProject,
             () => startWatchingElement(),
             { once: true },
         )

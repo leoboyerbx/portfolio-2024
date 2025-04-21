@@ -6,16 +6,16 @@ export default defineNuxtRouteMiddleware((to, from) => {
     if (import.meta.server)
         return
 
-    const store = useTransitionsStore()
+    const store = useTransitions()
 
-    if (store.isTransitionningToProject) {
+    if (store.value.isTransitionningToProject) {
         from.meta.pageTransition = {
             name: 'toProject',
             mode: 'out-in',
             css: false,
             async onLeave(_, done) {
                 document.body.classList.add('leaving-page')
-                await until(() => store.isLeaving).toBe(false)
+                await until(() => store.value.isLeaving).toBe(false)
                 document.body.classList.remove('leaving-page')
                 done()
             },
@@ -26,7 +26,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
             css: false,
             async onEnter(el, done) {
                 const thumb = el.querySelector('.project-thumb')
-                const linkThumbRect = store.linkRect
+                const linkThumbRect = store.value.linkRect
                 if (!thumb || !linkThumbRect) {
                     done()
                     return
@@ -78,8 +78,8 @@ export default defineNuxtRouteMiddleware((to, from) => {
                 ).finished
 
                 thumb.removeAttribute('style')
-                store.isTransitionningToProject = false
-                store.linkRect = undefined
+                store.value.isTransitionningToProject = false
+                store.value.linkRect = undefined
                 done()
             },
         }

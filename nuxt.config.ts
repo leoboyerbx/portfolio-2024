@@ -13,7 +13,6 @@ export default defineNuxtConfig({
         '@unocss/nuxt',
         '@vueuse/nuxt',
         '@nuxtjs/i18n',
-        '@pinia/nuxt',
         '@nuxt/image',
         '@nuxthub/core',
         '@nuxtjs/plausible',
@@ -81,6 +80,9 @@ export default defineNuxtConfig({
             cookieKey: 'i18n_redirected',
             redirectOn: 'root',
             fallbackLocale: 'en',
+        },
+        bundle: {
+            optimizeTranslationDirective: false,
         },
     },
     app: {

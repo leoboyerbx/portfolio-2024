@@ -2,9 +2,26 @@
 import { breakpointsTailwind } from '@vueuse/core'
 import { getLenis } from '~/plugins/lenis.client'
 
-const store = useMainNavStore()
+const shared = useMainNav()
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isMobile = breakpoints.smaller('sm')
+
+const distancesFromTop = computedWithControl(
+    () => shared.value.targets,
+    () => {
+        const result = []
+        for (const target of shared.value.targets) {
+            if (target?.getBoundingClientRect) {
+                result.push(window.scrollY + target.getBoundingClientRect().top)
+            }
+        }
+        return result
+    },
+)
+
+useEventListener('resize', () => {
+    distancesFromTop.trigger() // Recompute distances on resize
+})
 
 const { t, locale } = useI18n()
 const links = computed(() => ({
@@ -29,7 +46,7 @@ const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 0)
 
 const route = useRoute()
-const showNav = computed(() => !!route.meta.isHomePage && !store.hideNav)
+const showNav = computed(() => !!route.meta.isHomePage && !shared.value.hideNav)
 
 const navEl = ref<HTMLElement>()
 const menuEl = ref<HTMLElement>()
@@ -60,16 +77,16 @@ function goBack() {
 
 const offset = 192
 const currentTarget = computedWithControl(
-    () => [y.value, isMobile.value, store.distancesFromTop],
+    () => [y.value, isMobile.value, distancesFromTop.value],
     () => {
         if (!isMobile.value) {
             return 0
         }
-        if (store.distancesFromTop.length === 0) {
+        if (distancesFromTop.value.length === 0) {
             return 0
         }
-        for (let i = store.distancesFromTop.length - 1; i >= 0; i--) {
-            if (store.distancesFromTop[i] && (store.distancesFromTop[i]! < y.value + offset)) {
+        for (let i = distancesFromTop.value.length - 1; i >= 0; i--) {
+            if (distancesFromTop.value[i] && (distancesFromTop.value[i]! < y.value + offset)) {
                 return i
             }
         }

@@ -1,5 +1,5 @@
 <script setup>
-const transitions = useTransitionsStore()
+const transitions = useTransitions()
 </script>
 
 <template>
